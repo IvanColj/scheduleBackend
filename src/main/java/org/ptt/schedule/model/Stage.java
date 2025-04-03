@@ -23,7 +23,7 @@ public class Stage {
     private Stop initial;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "ultimate", nullable = false)
+    @JoinColumn(name = "final", nullable = false)
     private Stop ultimate;
 
     @Column(name = "weekday", nullable = false)
