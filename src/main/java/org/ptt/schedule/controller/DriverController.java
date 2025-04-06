@@ -1,12 +1,12 @@
 package org.ptt.schedule.controller;
 
 import lombok.AllArgsConstructor;
+import org.ptt.schedule.dto.DriverDTO;
 import org.ptt.schedule.model.Driver;
 import org.ptt.schedule.service.DriverService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -15,12 +15,12 @@ public class DriverController {
     private final DriverService driverService;
 
     @GetMapping("all")
-    public List<Driver> getAllDrivers() {
+    public List<DriverDTO> getAllDrivers() {
         return driverService.findAll();
     }
 
     @GetMapping("passport/{passport}")
-    public Optional<Driver> getPassportDriver(@PathVariable String passport) {
+    public DriverDTO getPassportDriver(@PathVariable String passport) {
         return driverService.findByPassport(passport);
     }
 

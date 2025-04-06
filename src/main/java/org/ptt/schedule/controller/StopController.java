@@ -1,13 +1,13 @@
 package org.ptt.schedule.controller;
 
 import lombok.AllArgsConstructor;
+import org.ptt.schedule.dto.StopDTO;
 import org.ptt.schedule.model.Stop;
 
 import org.ptt.schedule.service.StopService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -20,9 +20,9 @@ public class StopController {
         return stopService.findAll();
     }
 
-    @GetMapping("id/{id}")
-    public Optional<Stop> get(@PathVariable Integer id) {
-        return stopService.findById(id);
+    @GetMapping("number/{number}")
+    public StopDTO get(@PathVariable Integer number) {
+        return stopService.findById(number);
     }
 
     @PostMapping("save")

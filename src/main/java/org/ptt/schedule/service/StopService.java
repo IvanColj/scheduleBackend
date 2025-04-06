@@ -1,13 +1,13 @@
 package org.ptt.schedule.service;
 
+import org.ptt.schedule.dto.StopDTO;
 import org.ptt.schedule.model.Stop;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface StopService {
     List<Stop> findAll();
-    Optional<Stop> findById(Integer id);
+    StopDTO findById(Integer id);
 
     Stop save(Stop stop);
     Stop update(Stop stop);

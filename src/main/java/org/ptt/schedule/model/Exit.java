@@ -12,7 +12,7 @@ public class Exit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "number", nullable = false)
-    private Integer id;
+    private Integer number;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "transport", nullable = false)

@@ -1,5 +1,6 @@
 package org.ptt.schedule.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,7 @@ public class Transport {
     private String boardNumber;
 
     @OneToMany(mappedBy = "transport")
+    @JsonIgnore
     private Set<Exit> exits = new LinkedHashSet<>();
 
 }

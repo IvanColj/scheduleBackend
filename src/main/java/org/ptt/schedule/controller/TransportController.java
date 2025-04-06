@@ -1,18 +1,23 @@
 package org.ptt.schedule.controller;
 
 import lombok.AllArgsConstructor;
+import org.ptt.schedule.dto.ScheduleDTO;
+import org.ptt.schedule.dto.TransportDTO;
+import org.ptt.schedule.logic.StopSchedule;
 import org.ptt.schedule.model.Transport;
 import org.ptt.schedule.service.TransportService;
+import org.ptt.schedule.service.simple.SimpleTransportService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/transport")
 public class TransportController {
     private final TransportService transportService;
+    private final SimpleTransportService simpleTransportService;
 
     @GetMapping("all")
     public List<Transport> findAll() {
@@ -25,8 +30,23 @@ public class TransportController {
     }
 
     @GetMapping("number/{number}")
-    public Optional<Transport> findByNumber(@PathVariable String number) {
+    public TransportDTO findByNumber(@PathVariable String number) {
         return transportService.findByNumber(number);
+    }
+
+    @GetMapping("schedule/{board_number}")
+    public List<ScheduleDTO> findBySchedule(@PathVariable String board_number) {
+        return transportService.findBySchedule(board_number);
+    }
+
+    @GetMapping("schedules/{board_number}")
+    public Map<Integer, List<StopSchedule>> findBySchedules(@PathVariable String board_number) {
+        return simpleTransportService.findBySchedules(board_number);
+    }
+
+    @GetMapping("type")
+    public List<String> findAllTypes() {
+        return transportService.findAllTypes();
     }
 
     @PostMapping("save")

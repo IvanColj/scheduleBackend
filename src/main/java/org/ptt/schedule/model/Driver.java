@@ -1,5 +1,6 @@
 package org.ptt.schedule.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,13 +24,14 @@ public class Driver {
     @Column(name = "name", columnDefinition = "driver_name(0, 0) not null")
     private String name;
 
-    @Column(name = "patronymic", columnDefinition = "driver_name(0, 0) not null")
+    @Column(name = "patronymic", columnDefinition = "driver_name(0, 0)")
     private String patronymic;
 
     @Column(name = "date_birth")
     private LocalDate dateBirth;
 
     @OneToMany(mappedBy = "driver")
+    @JsonIgnore
     private Set<Exit> exits = new LinkedHashSet<>();
 
 }

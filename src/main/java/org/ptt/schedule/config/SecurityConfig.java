@@ -16,9 +16,16 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.List;
+
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final List<String> URLS_PERMIT_ALL = List.of("api/staff/all", "api/stages/route/**", "api/stages/all", "api/driver/all",
+            "api/stop/all", "api/exit/number/**", "api/exit/all", "api/stop/number/**", "api/transport/all", "api/transport/type", "api/transport/type/**"
+            , "api/transport/schedules/**");
 
     @Bean
     public CorsFilter corsFilter() {
@@ -37,7 +44,7 @@ public class SecurityConfig {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests.requestMatchers("api/staff/all").permitAll()
+                        authorizeRequests.requestMatchers(URLS_PERMIT_ALL.toArray(new String[0])).permitAll()
                                 .requestMatchers("api/staff/save").hasRole("ADMIN")
                                 //.requestMatchers("").hasRole("EDITOR")
                                 .requestMatchers("api/staff/login/**").hasAnyRole("EDITOR", "ADMIN")

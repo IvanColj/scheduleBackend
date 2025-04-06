@@ -1,13 +1,14 @@
 package org.ptt.schedule.service.simple;
 
 import lombok.AllArgsConstructor;
+import org.ptt.schedule.dto.StopDTO;
 import org.ptt.schedule.model.Stop;
 import org.ptt.schedule.repository.StopRepository;
 import org.ptt.schedule.service.StopService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -20,8 +21,13 @@ public class SimpleStopService implements StopService {
     }
 
     @Override
-    public Optional<Stop> findById(Integer id) {
-        return stopRepository.findById(id);
+    public StopDTO findById(Integer id) {
+        Stop stop = stopRepository.findById(id).orElseThrow();
+        return new StopDTO(
+                stop.getId(),
+                stop.getName(),
+                stop.getAddress()
+        );
     }
 
     @Override
@@ -35,6 +41,7 @@ public class SimpleStopService implements StopService {
     }
 
     @Override
+    @Transactional
     public void delete(Stop stop) {
         stopRepository.delete(stop);
     }

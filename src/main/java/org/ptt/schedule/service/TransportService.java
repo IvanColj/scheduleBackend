@@ -1,14 +1,17 @@
 package org.ptt.schedule.service;
 
+import org.ptt.schedule.dto.TransportDTO;
+import org.ptt.schedule.dto.ScheduleDTO;
 import org.ptt.schedule.model.Transport;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TransportService {
     List<Transport> findAll();
     List<Transport> findByType(String type);
-    Optional<Transport> findByNumber(String number);
+    TransportDTO findByNumber(String number);
+    List<ScheduleDTO> findBySchedule(String board_number);
+    List<String> findAllTypes();
 
     Transport save(Transport transport);
     Transport update(Transport transport);

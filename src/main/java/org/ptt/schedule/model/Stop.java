@@ -1,5 +1,8 @@
 package org.ptt.schedule.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,9 +28,10 @@ public class Stop {
     private String name;
 
     @OneToMany(mappedBy = "initial")
+    @JsonIgnore
     private Set<Stage> initial = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "ultimate")
+    @JsonIgnore
     private Set<Stage> ultimate = new LinkedHashSet<>();
-
 }

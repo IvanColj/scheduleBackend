@@ -1,5 +1,6 @@
 package org.ptt.schedule.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "number", nullable = false)
-    private Integer id;
+    private Integer number;
 
     @Column(name = "start", nullable = false)
     private LocalTime start;
@@ -25,12 +26,15 @@ public class Route {
     private Boolean weekday = false;
 
     @OneToMany(mappedBy = "route")
+    @JsonIgnore
     private Set<Exit> exits = new LinkedHashSet<>();
+
 
     @ManyToMany
     @JoinTable(name = "stages",
             joinColumns = @JoinColumn(name = "route"),
             inverseJoinColumns = @JoinColumn(name = "number"))
+    @JsonIgnore
     private Set<Stage> stages = new LinkedHashSet<>();
 
 }

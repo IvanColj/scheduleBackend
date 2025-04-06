@@ -1,5 +1,6 @@
 package org.ptt.schedule.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class Stage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "number", nullable = false)
-    private Integer id;
+    private Integer number;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "initial", nullable = false)
@@ -42,6 +43,7 @@ public class Stage {
     @JoinTable(name = "stages",
             joinColumns = @JoinColumn(name = "number"),
             inverseJoinColumns = @JoinColumn(name = "route"))
+    @JsonIgnore
     private Set<Route> routes = new LinkedHashSet<>();
 
 }

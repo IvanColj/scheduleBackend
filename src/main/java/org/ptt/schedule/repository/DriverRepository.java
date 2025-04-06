@@ -8,6 +8,4 @@ import java.util.Optional;
 public interface DriverRepository extends JpaRepository<Driver, String> {
     Optional<Driver> findByPassport(String passport);
     void deleteByPassport(String passport);
-
-    Driver update(Driver driver);
 }
