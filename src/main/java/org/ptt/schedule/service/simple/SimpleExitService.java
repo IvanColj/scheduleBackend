@@ -39,7 +39,27 @@ public class SimpleExitService implements ExitService {
     }
 
     @Override
-    public Exit save(Exit exit) {
+    public ExitDTO update(ExitDTO exit) {
+        Exit ex = exitRepository.findById(exit.getNumber()).orElseThrow();
+        if (ex.getDriver().getPassport() != null) {
+            ex.getDriver().setPassport(ex.getDriver().getPassport());
+        }
+        if (ex.getRoute().getNumber() != null) {
+            ex.getRoute().setNumber(ex.getRoute().getNumber());
+        }
+        if (ex.getTransport().getNumber() != null) {
+            ex.getTransport().setNumber(ex.getTransport().getNumber());
+        }
+        return exitRepository.update(new ExitDTO(
+                ex.getNumber(),
+                ex.getTransport().getNumber(),
+                ex.getRoute().getNumber(),
+                ex.getDriver().getPassport()
+        ));
+    }
+
+    @Override
+    public ExitDTO save(ExitDTO exit) {
         return exitRepository.save(exit);
     }
 

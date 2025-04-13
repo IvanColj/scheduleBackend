@@ -25,7 +25,7 @@ public class SecurityConfig {
 
     private final List<String> URLS_PERMIT_ALL = List.of("api/staff/all", "api/stages/route/**", "api/stages/all", "api/driver/all",
             "api/stop/all", "api/exit/number/**", "api/exit/all", "api/stop/number/**", "api/transport/all", "api/transport/type", "api/transport/type/**"
-            , "api/transport/schedules/**");
+            , "api/transport/schedules/**", "api/driver/delete/**", "api/driver/update", "api/staff/save");
 
     @Bean
     public CorsFilter corsFilter() {
@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests.requestMatchers(URLS_PERMIT_ALL.toArray(new String[0])).permitAll()
-                                .requestMatchers("api/staff/save").hasRole("ADMIN")
+                                .requestMatchers("api/driver/delete/**").hasRole("ADMIN")
                                 //.requestMatchers("").hasRole("EDITOR")
                                 .requestMatchers("api/staff/login/**").hasAnyRole("EDITOR", "ADMIN")
                                 .anyRequest().authenticated())

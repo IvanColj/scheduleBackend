@@ -31,13 +31,24 @@ public class SimpleStopService implements StopService {
     }
 
     @Override
-    public Stop save(Stop stop) {
+    public StopDTO save(StopDTO stop) {
         return stopRepository.save(stop);
     }
 
     @Override
-    public Stop update(Stop stop) {
-        return stopRepository.save(stop);
+    public StopDTO update(StopDTO stop) {
+        Stop oldStop = stopRepository.findById(stop.getNumber()).orElseThrow();
+        if (stop.getName() != null) {
+            oldStop.setName(stop.getName());
+        }
+        if (stop.getAddress() != null) {
+            oldStop.setAddress(stop.getAddress());
+        }
+        return stopRepository.update(new StopDTO(
+                oldStop.getId(),
+                oldStop.getName(),
+                oldStop.getAddress()
+        ));
     }
 
     @Override

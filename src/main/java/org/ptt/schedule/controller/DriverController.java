@@ -25,12 +25,12 @@ public class DriverController {
     }
 
     @PostMapping("save")
-    public Driver saveDriver(@RequestBody Driver driver) {
+    public Driver saveDriver(@RequestBody DriverDTO driver) {
         return driverService.save(driver);
     }
 
-    @PutMapping("update")
-    public Driver updateDriver(@RequestBody Driver driver) {
+    @PatchMapping("update")
+    public Driver updateDriver(@RequestBody DriverDTO driver) {
         return driverService.update(driver);
     }
 

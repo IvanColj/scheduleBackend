@@ -13,7 +13,7 @@ public interface TransportService {
     List<ScheduleDTO> findBySchedule(String board_number);
     List<String> findAllTypes();
 
-    Transport save(Transport transport);
-    Transport update(Transport transport);
+    TransportDTO save(TransportDTO transport);
+    TransportDTO update(TransportDTO transport);
     void delete(Transport transport);
 }

@@ -1,6 +1,7 @@
 package org.ptt.schedule.repository;
 
 import org.ptt.schedule.dto.ScheduleDTO;
+import org.ptt.schedule.dto.TransportDTO;
 import org.ptt.schedule.model.Transport;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -39,4 +40,6 @@ public interface TransportRepository extends JpaRepository<Transport, String> {
     @Query("select distinct t.type from Transport t")
     List<String> findByTypes();
 
+    TransportDTO update(TransportDTO transport);
+    TransportDTO save(TransportDTO transport);
 }

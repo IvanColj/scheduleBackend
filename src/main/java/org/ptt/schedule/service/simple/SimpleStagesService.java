@@ -31,12 +31,12 @@ public class SimpleStagesService implements StagesService {
     }
 
     @Override
-    public Stages update(Stages stages) {
+    public StagesDTO update(StagesDTO stages) {
         return stagesRepository.save(stages);
     }
 
     @Override
-    public Stages save(Stages stages) {
+    public StagesDTO save(StagesDTO stages) {
         return stagesRepository.save(stages);
     }
 

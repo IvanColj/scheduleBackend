@@ -34,7 +34,7 @@ public class StaffController {
         return staffService.save(staff);
     }
 
-    @PutMapping("update")
+    @PatchMapping("update")
     public Staff update(@RequestBody Staff staff) {
         return staffService.update(staff);
     }

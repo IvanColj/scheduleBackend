@@ -36,12 +36,19 @@ public class SimpleRouteService implements RouteService {
     }
 
     @Override
-    public Route update(Route route) {
-        return routeRepository.save(route);
+    public RouteDTO update(RouteDTO route) {
+        RouteDTO routeDTO = findById(route.getNumber());
+        if (route.getStart() != null) {
+            routeDTO.setStart(route.getStart());
+        }
+        if (route.getWeekday() != null) {
+            routeDTO.setWeekday(route.getWeekday());
+        }
+        return routeRepository.update(route);
     }
 
     @Override
-    public Route save(Route route) {
+    public RouteDTO save(RouteDTO route) {
         return routeRepository.save(route);
     }
 

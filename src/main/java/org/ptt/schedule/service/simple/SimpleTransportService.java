@@ -98,13 +98,28 @@ public class SimpleTransportService implements TransportService {
     }
 
     @Override
-    public Transport save(Transport transport) {
+    public TransportDTO save(TransportDTO transport) {
         return transportRepository.save(transport);
     }
 
     @Override
-    public Transport update(Transport transport) {
-        return transportRepository.save(transport);
+    public TransportDTO update(TransportDTO transport) {
+        Transport newTransport = new Transport();
+        if (transport.getType() != null) {
+            newTransport.setType(transport.getType());
+        }
+        if (transport.getModel() != null) {
+            newTransport.setModel(transport.getModel());
+        }
+        if (transport.getBoardNumber() != null) {
+            newTransport.setBoardNumber(transport.getBoardNumber());
+        }
+        return transportRepository.update(new TransportDTO(
+                transport.getNumber(),
+                transport.getType(),
+                transport.getModel(),
+                transport.getBoardNumber()
+        ));
     }
 
     @Override

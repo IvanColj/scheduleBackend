@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface StaffRepository extends JpaRepository<Staff, Integer> {
+    Optional<Staff> findById(Integer id);
     Optional<Staff> findByLogin(String login);
     List<Staff> findByRole(String role);
     void deleteById(@NonNull Integer id);

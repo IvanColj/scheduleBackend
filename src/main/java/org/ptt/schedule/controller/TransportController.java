@@ -50,12 +50,12 @@ public class TransportController {
     }
 
     @PostMapping("save")
-    public Transport save(@RequestBody Transport transport) {
+    public TransportDTO save(@RequestBody TransportDTO transport) {
         return transportService.save(transport);
     }
 
-    @PutMapping("update")
-    public Transport update(@RequestBody Transport transport) {
+    @PatchMapping("update")
+    public TransportDTO update(@RequestBody TransportDTO transport) {
         return transportService.update(transport);
     }
 

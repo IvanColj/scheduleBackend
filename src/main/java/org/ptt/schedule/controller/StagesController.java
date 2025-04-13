@@ -24,13 +24,13 @@ public class StagesController {
         return stagesService.findByRoute(route);
     }
 
-    @PutMapping("update")
-    public Stages update(@RequestBody Stages stages) {
+    @PatchMapping("update")
+    public StagesDTO update(@RequestBody StagesDTO stages) {
         return stagesService.save(stages);
     }
 
     @PostMapping("save")
-    public Stages save(@RequestBody Stages stages) {
+    public StagesDTO save(@RequestBody StagesDTO stages) {
         return stagesService.save(stages);
     }
 

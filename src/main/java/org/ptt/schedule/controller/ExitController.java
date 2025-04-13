@@ -2,7 +2,6 @@ package org.ptt.schedule.controller;
 
 import lombok.AllArgsConstructor;
 import org.ptt.schedule.dto.ExitDTO;
-import org.ptt.schedule.model.Exit;
 import org.ptt.schedule.service.ExitService;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +24,12 @@ public class ExitController {
     }
 
     @PostMapping("save")
-    public Exit save(@RequestBody Exit exit) {
+    public ExitDTO save(@RequestBody ExitDTO exit) {
         return exitService.save(exit);
     }
 
-    @PutMapping("update")
-    public Exit update(@RequestBody Exit exit) {
+    @PatchMapping("update")
+    public ExitDTO update(@RequestBody ExitDTO exit) {
         return exitService.save(exit);
     }
 

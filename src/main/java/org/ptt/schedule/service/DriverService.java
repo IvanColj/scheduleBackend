@@ -10,7 +10,7 @@ public interface DriverService {
     List<DriverDTO> findAll();
     DriverDTO findByPassport(String passport);
 
-    Driver save(Driver driver);
-    Driver update(Driver driver);
+    Driver save(DriverDTO driver);
+    Driver update(DriverDTO driver);
     void deleteByPassport(String passport);
 }

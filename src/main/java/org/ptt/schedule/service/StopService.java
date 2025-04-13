@@ -9,7 +9,7 @@ public interface StopService {
     List<Stop> findAll();
     StopDTO findById(Integer id);
 
-    Stop save(Stop stop);
-    Stop update(Stop stop);
+    StopDTO save(StopDTO stop);
+    StopDTO update(StopDTO stop);
     void delete(Stop stop);
 }

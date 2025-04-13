@@ -40,8 +40,17 @@ public class SimpleStaffService implements StaffService {
 
     @Override
     public Staff update(Staff staff) {
-        staff.setPassword(passwordEncoder.encode(staff.getPassword()));
-        return staffRepository.save(staff);
+        Staff updatedStaff = staffRepository.findById(staff.getId()).orElseThrow();
+        if (staff.getPassword() != null) {
+            updatedStaff.setPassword(passwordEncoder.encode(staff.getPassword()));
+        }
+        if (staff.getRole() != null) {
+            updatedStaff.setRole(staff.getRole());
+        }
+        if (staff.getLogin() != null) {
+            updatedStaff.setLogin(staff.getLogin());
+        }
+        return staffRepository.save(updatedStaff);
     }
 
     @Override

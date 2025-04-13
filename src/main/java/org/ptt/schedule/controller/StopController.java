@@ -26,12 +26,12 @@ public class StopController {
     }
 
     @PostMapping("save")
-    public Stop save(@RequestBody Stop stop) {
+    public StopDTO save(@RequestBody StopDTO stop) {
         return stopService.save(stop);
     }
 
-    @PutMapping("update")
-    public Stop update(@RequestBody Stop stop) {
+    @PatchMapping("update")
+    public StopDTO update(@RequestBody StopDTO stop) {
         return stopService.update(stop);
     }
 
