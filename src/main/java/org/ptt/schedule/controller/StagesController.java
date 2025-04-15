@@ -25,12 +25,12 @@ public class StagesController {
     }
 
     @PatchMapping("update")
-    public StagesDTO update(@RequestBody StagesDTO stages) {
+    public Stages update(@RequestBody StagesDTO stages) {
         return stagesService.save(stages);
     }
 
     @PostMapping("save")
-    public StagesDTO save(@RequestBody StagesDTO stages) {
+    public Stages save(@RequestBody StagesDTO stages) {
         return stagesService.save(stages);
     }
 

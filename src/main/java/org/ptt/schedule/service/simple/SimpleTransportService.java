@@ -2,7 +2,7 @@ package org.ptt.schedule.service.simple;
 
 import lombok.AllArgsConstructor;
 import org.ptt.schedule.dto.TransportDTO;
-import org.ptt.schedule.dto.ScheduleDTO;
+import org.ptt.schedule.logic.Schedule;
 import org.ptt.schedule.logic.StopSchedule;
 import org.ptt.schedule.model.Transport;
 import org.ptt.schedule.repository.TransportRepository;
@@ -40,7 +40,7 @@ public class SimpleTransportService implements TransportService {
     }
 
     @Override
-    public List<ScheduleDTO> findBySchedule(String board_number) {
+    public List<Schedule> findBySchedule(String board_number) {
         return transportRepository.findBySchedule(board_number);
     }
 
@@ -50,12 +50,12 @@ public class SimpleTransportService implements TransportService {
     }
 
     public Map<Integer, List<StopSchedule>> findBySchedules(String board_number) {
-        List<ScheduleDTO> schedulesRoute = transportRepository.findBySchedule(board_number);
+        List<Schedule> schedulesRoute = transportRepository.findBySchedule(board_number);
         Map<Integer, List<StopSchedule>> stopSchedules = new HashMap<>();
         long count = 0;
         int counter = 1;
-        ScheduleDTO last = null;
-        for (ScheduleDTO schedule : schedulesRoute) {
+        Schedule last = null;
+        for (Schedule schedule : schedulesRoute) {
             if (stopSchedules.containsKey(schedule.getRoute())) {
                 List<StopSchedule> stopScheduleList = stopSchedules.get(schedule.getRoute());
                 StopSchedule stopScheduleNew = new StopSchedule();
@@ -63,6 +63,7 @@ public class SimpleTransportService implements TransportService {
                 LocalTime initial = stopScheduleList.get(stopScheduleList.size() - 1).getTime();
                 LocalTime result = last.getWeekday().plusSeconds(initial.toSecondOfDay());
                 stopScheduleNew.setTime(result);
+                stopScheduleNew.setWeekdayOrWeekend(schedule.isWeekdayOrWeekend());
                 stopScheduleList.add(stopScheduleNew);
                 counter++;
                 if (counter == count) {
@@ -76,6 +77,7 @@ public class SimpleTransportService implements TransportService {
                 StopSchedule stopScheduleNew = new StopSchedule();
                 stopScheduleNew.setStop(schedule.getInitial());
                 stopScheduleNew.setTime(schedule.getStart());
+                stopScheduleNew.setWeekdayOrWeekend(schedule.isWeekdayOrWeekend());
                 stopScheduleList.add(stopScheduleNew);
                 stopSchedules.put(schedule.getRoute(), stopScheduleList);
                 counter = 1;
@@ -88,22 +90,33 @@ public class SimpleTransportService implements TransportService {
         return stopSchedules;
     }
 
-    private void insertToListSchedule(ScheduleDTO schedule, List<StopSchedule> stopScheduleList) {
+    private void insertToListSchedule(Schedule schedule, List<StopSchedule> stopScheduleList) {
         StopSchedule stopScheduleLast = new StopSchedule();
         stopScheduleLast.setStop(schedule.getUltimate());
         LocalTime initialLast = stopScheduleList.get(stopScheduleList.size() - 1).getTime();
-        LocalTime resultLast = schedule.getWeekday().plusSeconds(initialLast.toSecondOfDay());
+        LocalTime resultLast;
+        if (schedule.isWeekdayOrWeekend()) {
+            resultLast = schedule.getWeekday().plusSeconds(initialLast.toSecondOfDay());
+        }
+        else {
+            resultLast = schedule.getWeekend().plusSeconds(initialLast.toSecondOfDay());
+        }
         stopScheduleLast.setTime(resultLast);
         stopScheduleList.add(stopScheduleLast);
     }
 
     @Override
-    public TransportDTO save(TransportDTO transport) {
-        return transportRepository.save(transport);
+    public Transport save(TransportDTO transport) {
+        Transport transportToSave = new Transport();
+        transportToSave.setNumber(transport.getNumber());
+        transportToSave.setType(transport.getType());
+        transportToSave.setModel(transport.getModel());
+        transportToSave.setBoardNumber(transport.getBoardNumber());
+        return transportRepository.save(transportToSave);
     }
 
     @Override
-    public TransportDTO update(TransportDTO transport) {
+    public Transport update(TransportDTO transport) {
         Transport newTransport = new Transport();
         if (transport.getType() != null) {
             newTransport.setType(transport.getType());
@@ -114,12 +127,7 @@ public class SimpleTransportService implements TransportService {
         if (transport.getBoardNumber() != null) {
             newTransport.setBoardNumber(transport.getBoardNumber());
         }
-        return transportRepository.update(new TransportDTO(
-                transport.getNumber(),
-                transport.getType(),
-                transport.getModel(),
-                transport.getBoardNumber()
-        ));
+        return transportRepository.save(newTransport);
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.ptt.schedule.controller;
 
 import lombok.AllArgsConstructor;
 import org.ptt.schedule.dto.StageDTO;
+import org.ptt.schedule.model.Stage;
 import org.ptt.schedule.service.StageService;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +25,12 @@ public class StageController {
     }
 
     @PostMapping("save")
-    public StageDTO save(@RequestBody StageDTO stage) {
+    public Stage save(@RequestBody StageDTO stage) {
         return stageService.save(stage);
     }
 
     @PatchMapping("update")
-    public StageDTO update(@RequestBody StageDTO stage) {
+    public Stage update(@RequestBody StageDTO stage) {
         return stageService.update(stage);
     }
 

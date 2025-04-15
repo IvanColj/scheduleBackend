@@ -1,4 +1,4 @@
-package org.ptt.schedule.dto;
+package org.ptt.schedule.logic;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,8 +11,9 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ScheduleDTO {
+public class Schedule {
     Integer route;
+    boolean weekdayOrWeekend;
     String initial;
     String ultimate;
     LocalTime start;

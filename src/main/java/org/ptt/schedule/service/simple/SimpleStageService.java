@@ -44,7 +44,7 @@ public class SimpleStageService implements StageService {
     }
 
     @Override
-    public StageDTO update(StageDTO stage) {
+    public Stage update(StageDTO stage) {
         Stage oldStage = stageRepository.findById(stage.getNumber()).orElseThrow();
         if (stage.getInitial() != null) {
             oldStage.setInitial(oldStage.getInitial());
@@ -64,20 +64,13 @@ public class SimpleStageService implements StageService {
         if (stage.getWeekendJam() != null) {
             oldStage.setWeekendJam(oldStage.getWeekendJam());
         }
-        return stageRepository.update(new StageDTO(
-                oldStage.getNumber(),
-                oldStage.getInitial().getId(),
-                oldStage.getUltimate().getId(),
-                oldStage.getWeekday(),
-                oldStage.getWeekdayJam(),
-                oldStage.getWeekend(),
-                oldStage.getWeekendJam()
-        ));
+        return stageRepository.save(oldStage);
     }
 
     @Override
-    public StageDTO save(StageDTO stage) {
-        return stageRepository.save(stage);
+    public Stage save(StageDTO stage) {
+        Stage stageToSave = stageRepository.findById(stage.getNumber()).orElseThrow();
+        return stageRepository.save(stageToSave);
     }
 
     @Override

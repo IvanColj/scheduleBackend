@@ -3,6 +3,7 @@ package org.ptt.schedule.service.simple;
 import lombok.AllArgsConstructor;
 import org.ptt.schedule.dto.StagesDTO;
 import org.ptt.schedule.model.Stages;
+import org.ptt.schedule.model.StagesId;
 import org.ptt.schedule.repository.StagesRepository;
 import org.ptt.schedule.service.StagesService;
 import org.springframework.stereotype.Service;
@@ -31,13 +32,18 @@ public class SimpleStagesService implements StagesService {
     }
 
     @Override
-    public StagesDTO update(StagesDTO stages) {
+    public Stages update(Stages stages) {
         return stagesRepository.save(stages);
     }
 
     @Override
-    public StagesDTO save(StagesDTO stages) {
-        return stagesRepository.save(stages);
+    public Stages save(StagesDTO stages) {
+        Stages newStages = new Stages();
+        StagesId id = new StagesId();
+        id.setRoute(stages.getRoute());
+        id.setNumber(stages.getNumber());
+        newStages.setId(id);
+        return stagesRepository.save(newStages);
     }
 
     @Override

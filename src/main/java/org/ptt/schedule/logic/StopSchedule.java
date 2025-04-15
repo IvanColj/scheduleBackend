@@ -14,4 +14,5 @@ import java.time.LocalTime;
 public class StopSchedule {
     String stop;
     LocalTime time;
+    Boolean weekdayOrWeekend;
 }

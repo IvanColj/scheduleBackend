@@ -1,7 +1,7 @@
 package org.ptt.schedule.controller;
 
 import lombok.AllArgsConstructor;
-import org.ptt.schedule.dto.ScheduleDTO;
+import org.ptt.schedule.logic.Schedule;
 import org.ptt.schedule.dto.TransportDTO;
 import org.ptt.schedule.logic.StopSchedule;
 import org.ptt.schedule.model.Transport;
@@ -35,7 +35,7 @@ public class TransportController {
     }
 
     @GetMapping("schedule/{board_number}")
-    public List<ScheduleDTO> findBySchedule(@PathVariable String board_number) {
+    public List<Schedule> findBySchedule(@PathVariable String board_number) {
         return transportService.findBySchedule(board_number);
     }
 
@@ -50,12 +50,12 @@ public class TransportController {
     }
 
     @PostMapping("save")
-    public TransportDTO save(@RequestBody TransportDTO transport) {
+    public Transport save(@RequestBody TransportDTO transport) {
         return transportService.save(transport);
     }
 
     @PatchMapping("update")
-    public TransportDTO update(@RequestBody TransportDTO transport) {
+    public Transport update(@RequestBody TransportDTO transport) {
         return transportService.update(transport);
     }
 

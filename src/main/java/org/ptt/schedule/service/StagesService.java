@@ -9,7 +9,7 @@ public interface StagesService {
     List<StagesDTO> findAll();
     List<StagesDTO> findByRoute(Integer route);
 
-    StagesDTO update(StagesDTO stages);
-    StagesDTO save(StagesDTO stages);
+    Stages update(Stages stages);
+    Stages save(StagesDTO stages);
     void delete(Stages stages);
 }

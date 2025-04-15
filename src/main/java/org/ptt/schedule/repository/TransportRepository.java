@@ -1,7 +1,6 @@
 package org.ptt.schedule.repository;
 
-import org.ptt.schedule.dto.ScheduleDTO;
-import org.ptt.schedule.dto.TransportDTO;
+import org.ptt.schedule.logic.Schedule;
 import org.ptt.schedule.model.Transport;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,8 +13,9 @@ public interface TransportRepository extends JpaRepository<Transport, String> {
     Optional<Transport> findByNumber(String passport);
     List<Transport> findByType(String type);
     @Query("""
-    SELECT new org.ptt.schedule.dto.ScheduleDTO(
+    SELECT new org.ptt.schedule.logic.Schedule(
         r.number,
+        r.weekday,
         st1.address,
         st2.address,
         r.start,
@@ -35,11 +35,8 @@ public interface TransportRepository extends JpaRepository<Transport, String> {
         WHERE t.boardNumber = :boardNumber
     )
 """)
-    List<ScheduleDTO> findBySchedule(@Param("boardNumber") String boardNumber);
+    List<Schedule> findBySchedule(@Param("boardNumber") String boardNumber);
 
     @Query("select distinct t.type from Transport t")
     List<String> findByTypes();
-
-    TransportDTO update(TransportDTO transport);
-    TransportDTO save(TransportDTO transport);
 }

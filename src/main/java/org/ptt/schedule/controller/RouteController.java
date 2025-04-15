@@ -2,6 +2,7 @@ package org.ptt.schedule.controller;
 
 import lombok.AllArgsConstructor;
 import org.ptt.schedule.dto.RouteDTO;
+import org.ptt.schedule.model.Route;
 import org.ptt.schedule.service.RouteService;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +25,12 @@ public class RouteController {
     }
 
     @PostMapping("save")
-    public RouteDTO save(@RequestBody RouteDTO route) {
+    public Route save(@RequestBody RouteDTO route) {
         return routeService.save(route);
     }
 
     @PatchMapping("update")
-    public RouteDTO update(@RequestBody RouteDTO route) {
+    public Route update(@RequestBody RouteDTO route) {
         return routeService.update(route);
     }
 

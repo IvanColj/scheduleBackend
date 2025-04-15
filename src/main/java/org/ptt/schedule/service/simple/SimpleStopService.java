@@ -31,12 +31,16 @@ public class SimpleStopService implements StopService {
     }
 
     @Override
-    public StopDTO save(StopDTO stop) {
-        return stopRepository.save(stop);
+    public Stop save(StopDTO stop) {
+        Stop newStop = new Stop();
+        newStop.setId(stop.getNumber());
+        newStop.setName(stop.getName());
+        newStop.setAddress(stop.getAddress());
+        return stopRepository.save(newStop);
     }
 
     @Override
-    public StopDTO update(StopDTO stop) {
+    public Stop update(StopDTO stop) {
         Stop oldStop = stopRepository.findById(stop.getNumber()).orElseThrow();
         if (stop.getName() != null) {
             oldStop.setName(stop.getName());
@@ -44,16 +48,12 @@ public class SimpleStopService implements StopService {
         if (stop.getAddress() != null) {
             oldStop.setAddress(stop.getAddress());
         }
-        return stopRepository.update(new StopDTO(
-                oldStop.getId(),
-                oldStop.getName(),
-                oldStop.getAddress()
-        ));
+        return stopRepository.save(oldStop);
     }
 
     @Override
     @Transactional
-    public void delete(Stop stop) {
-        stopRepository.delete(stop);
+    public void delete(Integer number) {
+        stopRepository.delete(number);
     }
 }
