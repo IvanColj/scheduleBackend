@@ -1,8 +1,5 @@
 package org.ptt.schedule.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +11,9 @@ import lombok.Setter;
 public class Stages {
     @EmbeddedId
     private StagesId id;
+
+    @Column(name = "order_num", nullable = false)
+    private Integer orderNum;
 
     @MapsId("number")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

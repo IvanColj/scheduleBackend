@@ -21,6 +21,7 @@ public class SimpleStagesService implements StagesService {
         List<Stages> all = stagesRepository.findAll();
         return all.stream().map(stages ->
                 new StagesDTO(
+                        stages.getOrderNum(),
                         stages.getId().getNumber(),
                         stages.getId().getRoute()
                 )).toList();
@@ -42,6 +43,7 @@ public class SimpleStagesService implements StagesService {
         StagesId id = new StagesId();
         id.setRoute(stages.getRoute());
         id.setNumber(stages.getNumber());
+        newStages.setOrderNum(stages.getOrderNum());
         newStages.setId(id);
         return stagesRepository.save(newStages);
     }

@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface StagesRepository extends JpaRepository<Stages, StagesId> {
-    @Query("SELECT new org.ptt.schedule.dto.StagesDTO(s.id.route, s.id.number) FROM Stages s WHERE s.id.route = :route")
+    @Query("SELECT new org.ptt.schedule.dto.StagesDTO(s.orderNum, s.id.route, s.id.number) FROM Stages s WHERE s.id.route = :route")
     List<StagesDTO> findByRoute(@Param("route") Integer route);
 }

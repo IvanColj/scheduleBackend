@@ -25,7 +25,8 @@ public class SecurityConfig {
 
     private final List<String> URLS_PERMIT_ALL = List.of("api/staff/all", "api/stages/route/**", "api/stages/all", "api/driver/all",
             "api/stop/all", "api/exit/number/**", "api/exit/all", "api/stop/number/**", "api/transport/all", "api/transport/type", "api/transport/type/**"
-            , "api/transport/schedules/**", "api/driver/delete/**", "api/driver/update", "api/staff/save");
+            , "api/transport/schedules/**", "api/transport/scheduleTime/**", "api/transport/scheduleByTime/**", "api/transport/starts/**", "api/driver/delete/**",
+            "api/driver/update", "api/staff/save", "api/stop/startEnd/**");
 
     @Bean
     public CorsFilter corsFilter() {

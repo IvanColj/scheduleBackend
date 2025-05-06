@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StagesDTO {
+    private Integer orderNum;
     private Integer number;
     private Integer route;
 }

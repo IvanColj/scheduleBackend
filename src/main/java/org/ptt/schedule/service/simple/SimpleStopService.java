@@ -2,12 +2,15 @@ package org.ptt.schedule.service.simple;
 
 import lombok.AllArgsConstructor;
 import org.ptt.schedule.dto.StopDTO;
+import org.ptt.schedule.logic.StopStartEnd;
 import org.ptt.schedule.model.Stop;
 import org.ptt.schedule.repository.StopRepository;
 import org.ptt.schedule.service.StopService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -28,6 +31,11 @@ public class SimpleStopService implements StopService {
                 stop.getName(),
                 stop.getAddress()
         );
+    }
+
+    @Override
+    public List<StopStartEnd> getStopStartEnd(String address) {
+        return stopRepository.getStopStartEnd(URLDecoder.decode(address, StandardCharsets.UTF_8));
     }
 
     @Override

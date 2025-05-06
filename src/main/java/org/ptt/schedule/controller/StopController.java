@@ -2,6 +2,7 @@ package org.ptt.schedule.controller;
 
 import lombok.AllArgsConstructor;
 import org.ptt.schedule.dto.StopDTO;
+import org.ptt.schedule.logic.StopStartEnd;
 import org.ptt.schedule.model.Stop;
 
 import org.ptt.schedule.service.StopService;
@@ -23,6 +24,11 @@ public class StopController {
     @GetMapping("number/{number}")
     public StopDTO get(@PathVariable Integer number) {
         return stopService.findById(number);
+    }
+
+    @GetMapping("startEnd/{address}")
+    public List<StopStartEnd> getStartEnd(@PathVariable String address) {
+        return stopService.getStopStartEnd(address);
     }
 
     @PostMapping("save")

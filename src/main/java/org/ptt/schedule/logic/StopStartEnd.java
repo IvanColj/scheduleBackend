@@ -11,9 +11,10 @@ import java.time.LocalTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StopSchedule {
-    String stop;
-    LocalTime time;
-    Boolean weekday;
+public class StopStartEnd {
+    Integer number;
+    String stopStart;
+    String stopEnd;
+    LocalTime weekday;
+    LocalTime weekend;
 }
-

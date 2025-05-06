@@ -13,7 +13,7 @@ import java.time.LocalTime;
 @Setter
 public class Schedule {
     Integer route;
-    boolean weekdayOrWeekend;
+    Boolean weekdayOrWeekend;
     String initial;
     String ultimate;
     LocalTime start;
@@ -21,4 +21,5 @@ public class Schedule {
     LocalTime weekdayJam;
     LocalTime weekend;
     LocalTime weekendJam;
+    Integer orderNum;
 }

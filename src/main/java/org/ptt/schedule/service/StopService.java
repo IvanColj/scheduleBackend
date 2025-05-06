@@ -1,6 +1,7 @@
 package org.ptt.schedule.service;
 
 import org.ptt.schedule.dto.StopDTO;
+import org.ptt.schedule.logic.StopStartEnd;
 import org.ptt.schedule.model.Stop;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface StopService {
     Stop save(StopDTO stop);
     Stop update(StopDTO stop);
     void delete(Integer number);
+    List<StopStartEnd> getStopStartEnd(String address);
 }

@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import org.ptt.schedule.logic.Schedule;
 import org.ptt.schedule.dto.TransportDTO;
 import org.ptt.schedule.logic.StopSchedule;
+import org.ptt.schedule.logic.TimeSchedule;
 import org.ptt.schedule.model.Transport;
 import org.ptt.schedule.service.TransportService;
 import org.ptt.schedule.service.simple.SimpleTransportService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -39,9 +41,24 @@ public class TransportController {
         return transportService.findBySchedule(board_number);
     }
 
+    @GetMapping("scheduleByTime/{board_number}/{time}")
+    public List<TimeSchedule> findBySchedule(@PathVariable String board_number, @PathVariable LocalTime time) {
+        return simpleTransportService.findScheduleTime(board_number, time);
+    }
+
     @GetMapping("schedules/{board_number}")
     public Map<Integer, List<StopSchedule>> findBySchedules(@PathVariable String board_number) {
         return simpleTransportService.findBySchedules(board_number);
+    }
+
+    @GetMapping("scheduleTime/{boardNumber}/{time}")
+    List<Schedule> findScheduleByTime(@PathVariable String boardNumber, @PathVariable LocalTime time) {
+        return transportService.findScheduleByTime(boardNumber, time);
+    }
+
+    @GetMapping("starts/{board_number}")
+    public List<LocalTime> findAllStarts(@PathVariable String board_number) {
+        return simpleTransportService.findAllStarts(board_number);
     }
 
     @GetMapping("type")
