@@ -11,5 +11,5 @@ public interface StagesService {
 
     Stages update(Stages stages);
     Stages save(StagesDTO stages);
-    void delete(Stages stages);
+    void delete(StagesDTO stages);
 }

@@ -35,7 +35,7 @@ public class StagesController {
     }
 
     @DeleteMapping("delete")
-    public void delete(@RequestBody Stages stages) {
+    public void delete(@RequestBody StagesDTO stages) {
         stagesService.delete(stages);
     }
 }

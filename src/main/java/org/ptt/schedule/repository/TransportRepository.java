@@ -30,13 +30,13 @@ public interface TransportRepository extends JpaRepository<Transport, String> {
     JOIN s.initial st1
     JOIN s.ultimate st2
     JOIN Stages ss ON s.number = ss.id.number
-    JOIN s.routes r
+    JOIN ss.route r
     WHERE r IN (
         SELECT e.route
         FROM Exit e
         JOIN e.transport t
         WHERE t.boardNumber = :boardNumber
-    ) ORDER BY r.number, ss.orderNum
+    ) ORDER BY ss.orderNum, r.number, s.number
 """)
     List<Schedule> findBySchedule(@Param("boardNumber") String boardNumber);
 
@@ -72,13 +72,13 @@ public interface TransportRepository extends JpaRepository<Transport, String> {
     JOIN s.initial st1
     JOIN s.ultimate st2
     JOIN Stages ss ON s.number = ss.id.number
-    JOIN s.routes r
+    JOIN ss.route r
     WHERE r IN (
         SELECT e.route
         FROM Exit e
         JOIN e.transport t
         WHERE t.boardNumber = :boardNumber AND r.start = :time
-    ) ORDER BY r.number, ss.orderNum
+    ) ORDER BY ss.orderNum, r.number, s.number
 """)
     List<Schedule> findScheduleByTime(@Param("boardNumber") String boardNumber, @Param("time") LocalTime time);
 }
