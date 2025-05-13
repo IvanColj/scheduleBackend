@@ -20,6 +20,7 @@ public interface StopRepository extends JpaRepository<Stop, Integer> {
     @Query("""
             select new org.ptt.schedule.logic.StopStartEnd(
                 s.number,
+                ss.id.number,
                 st1.address,
                 st2.address,
                 s.weekday,

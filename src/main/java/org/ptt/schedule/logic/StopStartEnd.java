@@ -13,6 +13,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class StopStartEnd {
     Integer number;
+    Integer stage;
     String stopStart;
     String stopEnd;
     LocalTime weekday;
