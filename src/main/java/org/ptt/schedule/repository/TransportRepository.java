@@ -21,9 +21,7 @@ public interface TransportRepository extends JpaRepository<Transport, String> {
         st2.address,
         r.start,
         s.weekday,
-        s.weekdayJam,
         s.weekend,
-        s.weekendJam,
         ss.orderNum
     )
     FROM Stage s
@@ -63,9 +61,7 @@ public interface TransportRepository extends JpaRepository<Transport, String> {
         st2.address,
         r.start,
         s.weekday,
-        s.weekdayJam,
         s.weekend,
-        s.weekendJam,
         ss.orderNum
     )
     FROM Stage s

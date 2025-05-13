@@ -18,8 +18,6 @@ public class Schedule {
     String ultimate;
     LocalTime start;
     LocalTime weekday;
-    LocalTime weekdayJam;
     LocalTime weekend;
-    LocalTime weekendJam;
     Integer orderNum;
 }

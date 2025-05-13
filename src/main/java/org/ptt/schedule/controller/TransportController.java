@@ -36,10 +36,10 @@ public class TransportController {
         return transportService.findByNumber(number);
     }
 
-    @GetMapping("schedule/{board_number}")
-    public List<Schedule> findBySchedule(@PathVariable String board_number) {
-        return transportService.findBySchedule(board_number);
-    }
+//    @GetMapping("schedule/{board_number}")
+//    public List<Schedule> findBySchedule(@PathVariable String board_number) {
+//        return transportService.findBySchedule(board_number);
+//    }
 
     @GetMapping("scheduleByTime/{board_number}/{time}")
     public List<TimeSchedule> findBySchedule(@PathVariable String board_number, @PathVariable LocalTime time) {
@@ -51,10 +51,10 @@ public class TransportController {
         return simpleTransportService.findBySchedules(board_number);
     }
 
-    @GetMapping("scheduleTime/{boardNumber}/{time}")
-    List<Schedule> findScheduleByTime(@PathVariable String boardNumber, @PathVariable LocalTime time) {
-        return transportService.findScheduleByTime(boardNumber, time);
-    }
+//    @GetMapping("scheduleByTimeGrouped/{boardNumber}/{time}")
+//    List<Schedule> findScheduleByTime(@PathVariable String boardNumber, @PathVariable LocalTime time) {
+//        return transportService.findScheduleByTime(boardNumber, time);
+//    }
 
     @GetMapping("starts/{board_number}")
     public List<LocalTime> findAllStarts(@PathVariable String board_number) {

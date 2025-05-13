@@ -23,9 +23,9 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final List<String> URLS_PERMIT_ALL = List.of("api/staff/all", "api/stages/route/**", "api/stages/all", "api/driver/all",
+    private final List<String> URLS_PERMIT_ALL = List.of("api/staff/login/**", "api/stages/route/**", "api/stages/all", "api/driver/all",
             "api/stop/all", "api/exit/number/**", "api/exit/all", "api/stop/number/**", "api/transport/all", "api/transport/type", "api/transport/type/**"
-            , "api/transport/schedules/**", "api/transport/scheduleTime/**", "api/transport/scheduleByTime/**", "api/transport/starts/**", "api/driver/delete/**",
+            , "api/transport/schedules/**", "api/transport/scheduleByTimeGrouped/**", "api/transport/scheduleByTime/**", "api/transport/starts/**", "api/driver/delete/**",
             "api/driver/update", "api/staff/save", "api/stop/startEnd/**", "/api/stages/save", "/api/stages/delete", "/api/transport/number/");
 
     @Bean
@@ -47,8 +47,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests.requestMatchers(URLS_PERMIT_ALL.toArray(new String[0])).permitAll()
                                 .requestMatchers("api/driver/delete/**").hasRole("ADMIN")
-                                //.requestMatchers("").hasRole("EDITOR")
-                                .requestMatchers("api/staff/login/**").hasAnyRole("EDITOR", "ADMIN")
                                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .build();
